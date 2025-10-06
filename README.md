@@ -3,7 +3,7 @@
 This is the public facing repository for my startup AGX. 
 AGX contrains the output of an LLM to a premade function library to generate correct Terraform.
 
-Live demo here: [https://agx.run](agx.run)
+Live demo here: [agx.run](https://agx.run)
 
 ## Updates
 ### September 2025
