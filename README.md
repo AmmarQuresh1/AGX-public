@@ -69,7 +69,13 @@ fastapi dev app.py
 ```
 
 ## Roadmap
-- Current: Alpha demo
-- Q1 2026: Open-source CLI 
+
+* **AGX Core (Open Source):**
+    * v0.1.0 Alpha (Current): Reference implementation of the deterministic compiler.
+* **AGX CLI (Open Source):**
+    * v0.2.0: Lightweight remote client (Connects to AGX Cloud).
+* **AGX Cloud (Proprietary/Commercial):**
+    * v1.0.0 (Coming 2026): Managed state backend, drift detection, and DAG-based dependency resolution.
+    * *Note: The CLI serves strictly as a connectivity layer. All IR processing and compilation occurs within the secured AGX Cloud environment.*
 
 Built by [Ammar Qureshi](https://www.linkedin.com/in/ammar-qureshi-083831274)
