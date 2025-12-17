@@ -1,0 +1,289 @@
+@import "tailwindcss";
+
+:root {
+  --background: #fdfcf9;
+  --foreground: #0a0a0a;
+  /* Design tokens */
+  --surface: #faf8f4;      /* cards / subtle backgrounds */
+  --border: #b3b2ae;       /* soft border color */
+  --accent: #E0DBD1;       /* highlight / accent bg */
+  --muted: #52525b;        /* muted text - darker from #6b7280 */
+  --subtle: #3f3f46;       /* secondary text - darker from #4b5563 */
+  --code-surface: #f9f8f5; /* code block background */
+}
+
+/* Map fonts directly (Next Fonts define these CSS variables in layout) */
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans);
+}
+
+h2 {
+  font-size: 2.5rem;
+  font-weight: 500;
+}
+
+code {
+  background-color: #f3f4f6;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  font-size: 0.9em;
+  font-family: var(--font-geist-mono);
+}
+
+/* Simple text utilities */
+.text-subtle { color: var(--subtle); }
+.text-muted { color: var(--muted); }
+
+/* Layout helpers */
+.main {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 4rem;
+  background: var(--background);
+  color: var(--foreground);
+}
+
+.container {
+  width: 700px;
+  max-width: 90vw;
+  margin: 0 auto;
+  text-align: left;
+  align-items: center;
+}
+
+.logo-img {
+  height: 40px;
+  display: block;
+}
+
+.hero {
+  text-align: center;
+  min-height: 30vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.hero-title {
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1.1;
+  margin-top: 3vh;
+}
+
+.hero-lead {
+  font-size: 1.3rem;
+  color: var(--subtle);
+  margin: 0 auto 48px auto;
+  line-height: 1.5;
+  margin-top: 12px;
+  max-width: 600px;
+}
+.hero-sub {
+  font-size: 0.9rem;
+  color: var(--muted);
+  margin: 0 auto 48px auto;
+  margin-top: -24px;
+  line-height: 1.5;
+  max-width: 600px;
+}
+
+/* NEW: Container for the side-by-side buttons */
+.hero-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 3vh; /* Moved margin here */
+  flex-wrap: wrap; /* Safe wrapping for mobile */
+}
+
+/* UPDATED: Primary Call to Action */
+.cta-btn {
+  padding: 12px 24px; /* Slightly reduced for better mobile fit */
+  font-size: 1.1rem;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--accent);
+  color: #000;
+  cursor: pointer;
+  font-weight: 600;
+  /* REMOVED: margin-bottom: 3vh; */
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* NEW: Secondary "Ghost" Button (Matches CTA size) */
+.hero-btn-secondary {
+  padding: 12px 24px;
+  font-size: 1.1rem;
+  border-radius: 6px;
+  border: 1px solid var(--subtle);
+  background: transparent;
+  color: var(--foreground);
+  cursor: pointer;
+  font-weight: 500;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.hero-btn-secondary:hover {
+  border-color: var(--foreground);
+  background: rgba(0,0,0,0.03);
+}
+
+/* Components */
+.card {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  padding: 16px;
+}
+
+.input {
+  border: 1px solid var(--border);
+  background: #fffefe;
+  border-radius: 6px;
+  padding: 10px 12px;
+  font-size: 1rem;
+}
+.input:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0,0,0,0.06);
+}
+
+.button {
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 10px 12px;
+  font-size: 0.95rem;
+  background: var(--surface);
+  color: #000;
+  cursor: pointer;
+}
+.button[disabled] {
+  cursor: not-allowed;
+  background: var(--accent);
+}
+
+.pre-box {
+  background: var(--code-surface);
+  padding: 16px;
+  border-radius: 6px;
+  width: 100%;
+  min-height: 120px;
+  max-height: 400px;
+  overflow-x: auto;
+  font-size: 1rem;
+  color: #222;
+  border: 1px solid var(--border);
+  text-align: left;
+  box-sizing: border-box;
+}
+
+.copy-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  padding: 6px 14px;
+  font-size: 1rem;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  background: var(--code-surface);
+  color: #222;
+  cursor: pointer;
+}
+.copy-btn.copied {
+  background: var(--accent);
+}
+
+.nowrap { white-space: nowrap; }
+
+.footer-blurb {
+  margin-top: 40px;
+  margin-bottom: 6px;
+  color: #444;
+  font-size: 1.1rem;
+  text-align: center;
+}
+.footer-line {
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.85rem;
+  padding-top: 2rem;
+  padding-bottom: 4rem;
+  font-weight: 400;
+}
+
+/* Scroll bars */
+::-webkit-scrollbar {
+  width: 8px;
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #e0ddd6;   /* Matches your box color, or go lighter */
+  border-radius: 4px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* This is the container for your two columns */
+.roadmap-container {
+  display: flex;
+  flex-direction: row; /* Side-by-side on desktop */
+}
+
+/* When the screen is narrower than 768px (a typical tablet/mobile breakpoint) */
+@media (max-width: 768px) {
+  .roadmap-container {
+    flex-direction: column; /* Stack vertically on mobile */
+    gap: 2rem;
+  }
+  .roadmap-container > div {
+    border-left: none !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+}
+
+.prompt-form-container {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.prompt-form {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+}
+
+.prompt-input {
+  flex: 1;
+  min-width: 0;
+}
+
+.prompt-btn {
+  white-space: nowrap;
+}
+
+@media (max-width: 600px) {
+  .prompt-form {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .prompt-btn {
+    width: 100%;
+  }
+}

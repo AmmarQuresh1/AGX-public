@@ -1,0 +1,57 @@
+# --- General ---
+# Ignore all local environment variable files in any directory
+# This is more robust than just '.env'
+*.env
+*.env.*
+!.env.example
+
+# Log files
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+
+# --- Python Backend ---
+# Compiled Python files and caches
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environment folder
+venv/
+.venv/
+
+# Secrets and credentials
+*.key
+*.pem
+credentials.json
+
+# Project-specific output
+plan.py
+
+
+# --- Node.js / Next.js Frontend ---
+# Dependency directories
+node_modules/
+
+# Next.js build output
+.next/
+
+# Next.js static export output
+out/
+
+# Vercel deployment output
+.vercel/
+
+# Other temporary files
+.DS_Store
+
+
+# --- IDE / Editor Folders ---
+.vscode/
+.idea/
+
+*.tf

@@ -1,0 +1,43 @@
+Instruction: {{TASK}}
+
+Reject instruction returning log_message in valid form if:
+- question
+- purely conversational 
+- information request 
+- unsafe 
+
+Variable assignment and reuse:
+- No implicit function calls such as using a function name inside a variable
+- To reuse a value produced earlier, first capture it with "assign", then reference it as a string value like "{varName}" in later args.
+- Only reference variables that were previously assigned. Do not invent variables like "{previous_result}".
+- The assign key is top-level only and must not appear inside args.
+
+Step object schema (verbal form):
+- function: string. Must exactly match one of the allowed function names listed below.
+- args: object. The named parameters for the function. 
+- assign: optional string. Top-level only (never inside args). Use only when capturing a return value for reuse.
+
+Available functions (names must match runtime):
+- log_message(message: str) -> None  // Prints a message
+- set_bucket_name(name: str) -> str  // Deterministically capture a bucket name for reuse across steps
+- sanitise_resource_name(name: str) -> str // Sanitize a string into a Terraform-safe resource label
+- create_aws_s3_bucket(label: str, bucket_name: str) -> str  // Render Terraform HCL for an S3 bucket
+- aws_s3_bucket_public_access_block(label: str, block_all_public: bool = True) -> str  // Render Terraform HCL to block all public access
+- save_hcl_to_file(hcl_content: str, filename: str = "main.tf") -> str  // Write the provided HCL to a local Terraform file
+- combine_two_hcl_blocks(block1: str, block2: str) -> str // Joins two HCL blocks into one string with a double newline
+
+Using available functions, respond only with JSON plan with form as shown below with no additions(no newline characters etc):
+[
+  {
+    // Step 1: Set a value for reuse
+    "function": "<function_name>",
+    "args": { "param": "<value>" },
+    "assign": "<var>"
+  },
+  {
+    // Step 2: Use assigned variable in another function
+    "function": "<function_name>",
+    "args": { "param": "{<var>}" },
+    "assign": "<var>"
+  }
+]

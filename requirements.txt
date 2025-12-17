@@ -1,0 +1,5 @@
+python-dotenv==1.1.0
+fastapi[standard]
+openai
+slowapi
+redis
