@@ -21,7 +21,7 @@ Standard AI agents write code probabilistically. AGX generates code deterministi
 
 ## Architecture
 
-AGX treats the LLM as an untrusted planner, sandwiching it between a strict validator and a deterministic compiler.
+AGX implements a linear pipeline where the LLM functions as an untrusted planner. Its output is gated by a strict validator and only passed to the deterministic compiler if verified.
 
 ```mermaid
 graph LR
