@@ -13,7 +13,7 @@
 
 ## Architecture
 
-The AGX engine is built on a neuro-symbolic architecture designed to guarantee correctness. While the current Alpha implements the core Planner -> Validator -> Compiler pipeline, the full system design (below) integrates a DPO feedback loop and synthetic data generation to automate reliability.
+The AGX engine is built on a neuro-symbolic architecture designed to guarantee correctness. While the current Alpha implements the core Planner -> Validator -> Compiler pipeline, the full system design (below) integrates a DPO feedback loop and context window tightening to improve system reliability.
 
 ```mermaid
 graph TD
