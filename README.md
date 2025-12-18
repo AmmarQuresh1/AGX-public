@@ -7,9 +7,54 @@
 
 > **Live Demo:** [agx.run](https://agx.run)
 > 
-> **Note:** This repository is a public snapshot of the AGX core engine. Active development occurs in a private repository to maintain commercial IP separation. This snapshot is provided for architectural review and demo purposes.
+> **Note:** This repository is an early snapshot of the AGX engine. Active development occurs in a private repository to maintain commercial IP separation. This snapshot is provided for architectural review and demo purposes.
 
 **AGX** is a deterministic compiler that translates natural language into verifiable Terraform. It constrains LLM output to a strict registry of predefined templates, eliminating the syntax errors and hallucinations common in generative approaches.
+
+## Architecture
+
+The AGX engine is built on a neuro-symbolic architecture designed to guarantee correctness. While the current Alpha implements the core Planner -> Validator -> Compiler pipeline, the full system design (below) integrates a DPO feedback loop and synthetic data generation to automate reliability.
+
+```mermaid
+graph TD
+    A[User Prompt] -->|Natural Language| A0[Registry Distillation]
+    A0 -->|Context + Prompt| B(Planner / LLM)
+
+    B -->|Generates| S[Skeleton IR <br/><i>Generic JSON</i>]
+    
+    S --> P[Parameter Consolidator]
+    L[Load tfstate / Remote Context] --> P
+    P -- Missing/Ambiguous --> U[CLI User Input]
+    U -->|User Specific Values/Selection| P
+    
+    P -->|Assembled Final IR <br/><i>Specific JSON</i>| C{Static DAG & Policy Validator}
+
+    C -- Invalid --> R{Max Retries?}
+    R -- No --> B
+    
+    R -- Yes --> M[Human Intervention Queue]
+    M -->|Manual Fix| H_Fix[Create Correct Skeleton]
+    H_Fix -->|Log Human Pair| G[DPO Dataset Store]
+
+    C -- Valid --> J[User DB <br/><i>Store Assembled JSON IR</i>]
+
+    C -- Valid --> D[Compiler]
+    
+    D -->|Synthesize| Py[Synthesized Python Script]
+    
+    Py -->|Run| E[Executor]
+    E -->|Emit Artifacts| T[Terraform Files]
+    T --> H[Return Artifacts to CLI]
+    
+    C -- Valid --> Syn1[Extract Valid Skeleton JSON]
+    Syn1 -->|Pass to| K[Synthetic Corruptor]
+    K -->|Generate 'Rejected' Variant| Syn2[Log Synthetic Pair]
+    Syn2 --> G
+    
+    %% --- TRAINING LOOP ---
+    G --> I[DPO Training Pipeline]
+    I -.->|Update Model Weights| B
+```
 
 ## The Concept
 
@@ -20,19 +65,6 @@ Standard AI agents write code probabilistically. AGX generates code deterministi
 | **Probabilistic:** "Hopefully this syntax is right." | **Deterministic:** Syntax is guaranteed by a static registry. |
 | **Hallucinations:** Invents non-existent arguments. | **Type Safety:** Validates args against Python signatures. |
 | **Black Box:** Hard to debug or audit. | **Auditable:** Compiles to an intermediate Python artifact. |
-
-## Architecture
-
-AGX implements a linear pipeline where the LLM functions as an untrusted planner. Its output is gated by a strict validator and only passed to the deterministic compiler if verified.
-
-```mermaid
-graph TD
-    A[User Prompt] -->|Natural Language| B(Planner / LLM);
-    B -->|JSON IR| C{Static Validator};
-    C -- Invalid --> F[Reject Plan];
-    C -- Valid --> D[Compiler];
-    D -->|Synthesize| E[Verified Python Script];
-```
 
 ## Repository Structure
 
