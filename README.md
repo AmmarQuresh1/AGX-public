@@ -6,6 +6,8 @@
 ![TypeScript](https://img.shields.io/badge/typescript-5.0+-blue)
 
 > **Live Demo:** [agx.run](https://agx.run)
+> 
+> **Note:** This repository is a public snapshot of the AGX core engine. Active development occurs in a private repository to maintain commercial IP separation. This snapshot is provided for architectural review and demo purposes.
 
 **AGX** is a deterministic compiler that translates natural language into verifiable Terraform. It constrains LLM output to a strict registry of predefined templates, eliminating the syntax errors and hallucinations common in generative approaches.
 
@@ -73,7 +75,7 @@ fastapi dev app.py
 * **AGX Core (Open Source):**
     * v0.1.0 Alpha (Current): Reference implementation of the deterministic compiler.
 * **AGX CLI (Open Source):**
-    * v0.2.0: Lightweight remote client (Connects to AGX Cloud).
+    * v0.1.0: Lightweight remote client (Connects to AGX Cloud).
 * **AGX Cloud (Proprietary/Commercial):**
     * v1.0.0 (Coming 2026): Managed state backend, drift detection, and DAG-based dependency resolution.
     * *Note: The CLI serves strictly as a connectivity layer. All IR processing and compilation occurs within the secured AGX Cloud environment.*
