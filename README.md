@@ -77,7 +77,7 @@ fastapi dev app.py
 * **AGX CLI (Open Source):**
     * v0.1.0: Lightweight remote client (Connects to AGX Cloud).
 * **AGX Cloud (Proprietary/Commercial):**
-    * v1.0.0 (Coming 2026): Managed state backend, drift detection, and DAG-based dependency resolution.
+    * v1.0.0 (Coming 2026): DAG-based dependency resolution.
     * *Note: The CLI serves strictly as a connectivity layer. All IR processing and compilation occurs within the secured AGX Cloud environment.*
 
 Built by [Ammar Qureshi](https://www.linkedin.com/in/ammar-qureshi-083831274)
